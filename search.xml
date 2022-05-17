@@ -4,6 +4,57 @@
   
     
     <entry>
+      <title>CSS中size-adjust和unicode-range改变任意文字尺寸</title>
+      <link href="/2022/05/16/CSS%E4%B8%ADsize-adjust%E5%92%8Cunicode-range%E6%94%B9%E5%8F%98%E4%BB%BB%E6%84%8F%E6%96%87%E5%AD%97%E5%B0%BA%E5%AF%B8/"/>
+      <url>/2022/05/16/CSS%E4%B8%ADsize-adjust%E5%92%8Cunicode-range%E6%94%B9%E5%8F%98%E4%BB%BB%E6%84%8F%E6%96%87%E5%AD%97%E5%B0%BA%E5%AF%B8/</url>
+      
+        <content type="html"><![CDATA[<h3 id="任意字符的尺寸设置"><a href="#任意字符的尺寸设置" class="headerlink" title="任意字符的尺寸设置"></a>任意字符的尺寸设置</h3><p>针对售价单位的字体尺寸大小原始方法是使用::first-letter<br>现在可以使用size-adjust和unicode-range</p><ul><li><p>html部分 </p><pre class=" language-html"><code class="language-html">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>price<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>100元<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre></li><li><p>css部分</p><pre class=" language-css"><code class="language-css">  <span class="token atrule"><span class="token rule">@font-face</span></span> <span class="token punctuation">{</span>      <span class="token property">font-family</span><span class="token punctuation">:</span> smallYuan<span class="token punctuation">;</span>      <span class="token property">src</span><span class="token punctuation">:</span> <span class="token function">local</span><span class="token punctuation">(</span><span class="token string">'PingFang SC'</span><span class="token punctuation">)</span>,      <span class="token function">local</span><span class="token punctuation">(</span><span class="token string">"Microsoft Yahei"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token property">size-adjust</span><span class="token punctuation">:</span> <span class="token number">50%</span><span class="token punctuation">;</span>      <span class="token property">unicode-range</span><span class="token punctuation">:</span> U+<span class="token number">5143</span><span class="token punctuation">;</span>  <span class="token punctuation">}</span>  <span class="token selector"><span class="token class">.price</span> </span><span class="token punctuation">{</span>      <span class="token property">font-family</span><span class="token punctuation">:</span> smallYuan<span class="token punctuation">;</span>      <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">24</span>px<span class="token punctuation">;</span>      <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>  <span class="token punctuation">}</span></code></pre></li></ul><blockquote><p>size-adjust属性用在@font-face中：<br>支持百分比值，当为0%时则为隐藏效果<br>unicode-range支持任意数量的字符，<br>该方法可以突破12px最小字体限制</p></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CSS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSS滚动高度自动锁定的粘贴效果</title>
+      <link href="/2022/05/16/CSS%E6%BB%9A%E5%8A%A8%E9%AB%98%E5%BA%A6%E8%87%AA%E5%8A%A8%E9%94%81%E5%AE%9A%E7%9A%84%E7%B2%98%E8%B4%B4%E6%95%88%E6%9E%9C/"/>
+      <url>/2022/05/16/CSS%E6%BB%9A%E5%8A%A8%E9%AB%98%E5%BA%A6%E8%87%AA%E5%8A%A8%E9%94%81%E5%AE%9A%E7%9A%84%E7%B2%98%E8%B4%B4%E6%95%88%E6%9E%9C/</url>
+      
+        <content type="html"><![CDATA[<h3 id="双Sticky粘性定位"><a href="#双Sticky粘性定位" class="headerlink" title="双Sticky粘性定位"></a>双Sticky粘性定位</h3><pre class=" language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header-inner</span><span class="token punctuation">></span></span>            ...        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header-inner</span><span class="token punctuation">></span></span>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header</span><span class="token punctuation">></span></span></code></pre><hr><pre class=" language-css"><code class="language-css">    <span class="token selector">header </span><span class="token punctuation">{</span>        <span class="token property">--height-outer</span><span class="token punctuation">:</span> <span class="token number">120</span>px<span class="token punctuation">;</span>        <span class="token property">--height-inner</span><span class="token punctuation">:</span> <span class="token number">60</span>px<span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">/* by zhangxinxu */</span>        <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>        <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>        <span class="token property">position</span><span class="token punctuation">:</span> sticky<span class="token punctuation">;</span>        <span class="token property">height</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--height-outer<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token property">top</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--height-inner<span class="token punctuation">)</span> - <span class="token function">var</span><span class="token punctuation">(</span>--height-outer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token selector">header-inner </span><span class="token punctuation">{</span>        <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>        <span class="token property">line-height</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--height-inner<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token property">position</span><span class="token punctuation">:</span> sticky<span class="token punctuation">;</span>        <span class="token property">top</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CSS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>rabbitmq中文路径闪退问题</title>
+      <link href="/2022/05/06/rabbitmq%E4%B8%AD%E6%96%87%E8%B7%AF%E5%BE%84%E9%97%AA%E9%80%80%E9%97%AE%E9%A2%98/"/>
+      <url>/2022/05/06/rabbitmq%E4%B8%AD%E6%96%87%E8%B7%AF%E5%BE%84%E9%97%AA%E9%80%80%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h3 id="rabbitmq-启动闪退问题，修改电脑中文用户名情况"><a href="#rabbitmq-启动闪退问题，修改电脑中文用户名情况" class="headerlink" title="rabbitmq 启动闪退问题，修改电脑中文用户名情况"></a>rabbitmq 启动闪退问题，修改电脑中文用户名情况</h3><blockquote><p>tips :首先呢，rabbitmq安装时要求所有路径不能带有中文，但是有些情况下，电脑C盘的用户初始命名为中文，<br> 则会影响rabbitmq的启动，以下解决方案摘录<a href="https://blog.csdn.net/leoma2012/article/details/97636859#:~:text=%E7%BB%93%E6%9E%9C%E5%A6%82%E4%B8%8B%EF%BC%9A%20rabbitmq%E5%AE%89%E8%A3%85%E7%94%A8%E6%88%B7%20%E5%90%8D%E5%AD%98%E5%9C%A8%20%E4%B8%AD%E6%96%87%E8%A7%A3%E5%86%B3%20%3A%20%E5%A4%A7%E6%AD%A5%E9%AA%A4%E5%88%86%E4%B8%BA%E4%B8%A4%E6%AD%A5%3A%20%E4%B8%8D%E9%9C%80%E8%A6%81%E7%BD%91%E4%B8%8A%E8%AF%B4%E7%9A%84%E7%AE%A1%E7%90%86%E5%91%98%E8%BF%90%E8%A1%8C%2C%E5%BF%85%E9%A1%BB%20%E5%AE%89%E8%A3%85,%E8%B7%AF%E5%BE%84%20%E5%9C%A8path%E4%B8%AD%E6%B7%BB%E5%8A%A0%25ERLANG_HOME%25bin%3B%202%20%E5%AE%89%E8%A3%85%20%E7%AC%AC%E4%BA%8C%E4%B8%AA%E8%BD%AF%E4%BB%B6%2C%20rabbitmq%201">某博客</a>以作备忘录</p></blockquote><h4 id="前提：安装并配置erlang以及安装完rabbitmq软件的后续操作-这些默认你已经完成"><a href="#前提：安装并配置erlang以及安装完rabbitmq软件的后续操作-这些默认你已经完成" class="headerlink" title="前提：安装并配置erlang以及安装完rabbitmq软件的后续操作,这些默认你已经完成"></a>前提：安装并配置erlang以及安装完rabbitmq软件的后续操作,这些默认你已经完成</h4><h5 id="第一步：以管理员的身份运行cmd，在该cmd中切换目录至rabbitmq安装目录（sbin下）"><a href="#第一步：以管理员的身份运行cmd，在该cmd中切换目录至rabbitmq安装目录（sbin下）" class="headerlink" title="第一步：以管理员的身份运行cmd，在该cmd中切换目录至rabbitmq安装目录（sbin下）"></a>第一步：以管理员的身份运行cmd，在该cmd中切换目录至rabbitmq安装目录（sbin下）</h5><h5 id="第二步："><a href="#第二步：" class="headerlink" title="第二步："></a>第二步：</h5><pre><code>    ./rabbitmq-service.bat remove</code></pre><h5 id="第三步："><a href="#第三步：" class="headerlink" title="第三步："></a>第三步：</h5><pre><code>    ./set RABBITMQ_BASE=D:\rabbitmq_server\data</code></pre><p>（其中 D:\rabbitmq_server\data是自定义的目录，应该是一个软连接，绕过 c\user\用中文用户名\AppData\Roaming\RabbitMQ 这个文件夹，这样就不会有中文路径的问题了）</p><h5 id="第四步："><a href="#第四步：" class="headerlink" title="第四步："></a>第四步：</h5><pre><code>    ./rabbitmq-service.bat install</code></pre><h5 id="第五步：激活插件"><a href="#第五步：激活插件" class="headerlink" title="第五步：激活插件"></a>第五步：激活插件</h5><pre><code>    ./rabbitmq-plugins enable rabbitmq_management</code></pre><h5 id="第六步：去服务管理重启服务即可"><a href="#第六步：去服务管理重启服务即可" class="headerlink" title="第六步：去服务管理重启服务即可"></a>第六步：去服务管理重启服务即可</h5><blockquote><p>tips:这些命令摘自网上某博主的，但是呢每一行命令都没有（.&#x2F;）<br> 我是根据语法报错添加上运行成功的</p></blockquote><p>我的个人理解是这个rabbitmq软件读写路径不能为中文，需要修改电脑用户名<br>（不是设置里的昵称，是C盘的user下中文名，当然有的人购买电脑初始化留了心眼，设定就不是中文就不存在这个问题）<br>这个成本就说不好了，<br>操作电脑系统配置比较危险，那么就修改rabbitmq配置让他绕过中文用户名这个路径,<br>所以先（第一步）remove它的service脚本，再指定自定义系统变量的路径（第二步），<br>再重新（第三步）安装service脚本，最后激活插件 </p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CSS盒子居中</title>
       <link href="/2022/05/05/CSS%E7%9B%92%E5%AD%90%E5%B1%85%E4%B8%AD/"/>
       <url>/2022/05/05/CSS%E7%9B%92%E5%AD%90%E5%B1%85%E4%B8%AD/</url>
