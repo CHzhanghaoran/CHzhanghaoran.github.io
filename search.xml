@@ -4,6 +4,83 @@
   
     
     <entry>
+      <title>Session问题</title>
+      <link href="/2023/03/12/Session%E9%97%AE%E9%A2%98/"/>
+      <url>/2023/03/12/Session%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Session-在nodejs后台保存session时取值undefined问题"><a href="#Session-在nodejs后台保存session时取值undefined问题" class="headerlink" title="Session 在nodejs后台保存session时取值undefined问题"></a>Session 在nodejs后台保存session时取值undefined问题</h3><h2 id="前提-做nodejs项目后台登录使用验证码，获取验证码接口时session保存值，在注册登录时校验时session取值undefined问题"><a href="#前提-做nodejs项目后台登录使用验证码，获取验证码接口时session保存值，在注册登录时校验时session取值undefined问题" class="headerlink" title="前提  做nodejs项目后台登录使用验证码，获取验证码接口时session保存值，在注册登录时校验时session取值undefined问题"></a>前提  做nodejs项目后台登录使用验证码，获取验证码接口时session保存值，在注册登录时校验时session取值undefined问题</h2><h2 id="查阅资料-可能性1-app-js挂载时session的中间件未写在router之前"><a href="#查阅资料-可能性1-app-js挂载时session的中间件未写在router之前" class="headerlink" title="查阅资料 可能性1 app.js挂载时session的中间件未写在router之前"></a>查阅资料 可能性1 app.js挂载时session的中间件未写在router之前</h2><h2 id="可能性2，未作跨域处理"><a href="#可能性2，未作跨域处理" class="headerlink" title="可能性2，未作跨域处理"></a>可能性2，未作跨域处理</h2><h2 id="最终发现细节：localhost和http：-x2F-x2F-127-0-0-1-会当作不同客户端发送请求，所以在前后端项目中最好保持一直"><a href="#最终发现细节：localhost和http：-x2F-x2F-127-0-0-1-会当作不同客户端发送请求，所以在前后端项目中最好保持一直" class="headerlink" title="最终发现细节：localhost和http：&#x2F;&#x2F;127.0.0.1 会当作不同客户端发送请求，所以在前后端项目中最好保持一直"></a>最终发现细节：localhost和http：&#x2F;&#x2F;127.0.0.1 会当作不同客户端发送请求，所以在前后端项目中最好保持一直</h2><h2 id="问题就是在于，保存值时是一个session-，取值是新的session"><a href="#问题就是在于，保存值时是一个session-，取值是新的session" class="headerlink" title="问题就是在于，保存值时是一个session ，取值是新的session"></a>问题就是在于，保存值时是一个session ，取值是新的session</h2><h2 id="记录一下"><a href="#记录一下" class="headerlink" title="记录一下"></a>记录一下</h2>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue自定义指令_只读/编辑模式切换</title>
+      <link href="/2022/05/26/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4-%E5%8F%AA%E8%AF%BB-%E7%BC%96%E8%BE%91%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2/"/>
+      <url>/2022/05/26/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4-%E5%8F%AA%E8%AF%BB-%E7%BC%96%E8%BE%91%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2/</url>
+      
+        <content type="html"><![CDATA[<h3 id="vue中自定义指令：依据自己需求封装一个指令更方便"><a href="#vue中自定义指令：依据自己需求封装一个指令更方便" class="headerlink" title="vue中自定义指令：依据自己需求封装一个指令更方便"></a>vue中自定义指令：依据自己需求封装一个指令更方便</h3><p>项目中有流程步骤较多，但是有些流程组件是内容大致相同的，但要求不同，可能一个是只读，一个是可编辑<br>这时候就想到封装一个自定义指令v-disable控制组件的对应模式，<br>使用时</p><p>vue自定义指令注册方式，参考vue.js官方文档<br><img src="" alt=""/></p><pre class=" language-js"><code class="language-js">    <span class="token keyword">const</span> disable <span class="token operator">=</span> <span class="token punctuation">{</span>    <span class="token function">bind</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> binding<span class="token punctuation">,</span> vnode<span class="token punctuation">)</span> <span class="token punctuation">{</span>      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> binding<span class="token punctuation">,</span> vnode<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token keyword">const</span> flag <span class="token operator">=</span> binding<span class="token punctuation">.</span>value<span class="token punctuation">;</span>      <span class="token keyword">const</span> menban <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      menban<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span> <span class="token string">'menban'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      el<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>menban<span class="token punctuation">)</span><span class="token punctuation">;</span>      menban<span class="token punctuation">.</span>style<span class="token punctuation">.</span>background <span class="token operator">=</span> <span class="token string">'transparent'</span><span class="token punctuation">;</span>      menban<span class="token punctuation">.</span>style<span class="token punctuation">.</span>top <span class="token operator">=</span> <span class="token string">'0'</span><span class="token punctuation">;</span>      menban<span class="token punctuation">.</span>style<span class="token punctuation">.</span>left <span class="token operator">=</span> <span class="token string">'0'</span><span class="token punctuation">;</span>      menban<span class="token punctuation">.</span>style<span class="token punctuation">.</span>width <span class="token operator">=</span> <span class="token string">'100%'</span><span class="token punctuation">;</span>      menban<span class="token punctuation">.</span>style<span class="token punctuation">.</span>height <span class="token operator">=</span> <span class="token string">'100%'</span><span class="token punctuation">;</span>      <span class="token keyword">if</span> <span class="token punctuation">(</span>flag<span class="token punctuation">)</span> <span class="token punctuation">{</span>        menban<span class="token punctuation">.</span>style<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token string">'absolute'</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>        menban<span class="token punctuation">.</span>style<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token string">'relative'</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span>    <span class="token punctuation">}</span><span class="token punctuation">,</span>    <span class="token function">update</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> binding<span class="token punctuation">,</span> vnode<span class="token punctuation">,</span> oldVnode<span class="token punctuation">)</span> <span class="token punctuation">{</span>      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> binding<span class="token punctuation">,</span> vnode<span class="token punctuation">,</span> oldVnode<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token keyword">const</span> flag <span class="token operator">=</span> binding<span class="token punctuation">.</span>value<span class="token punctuation">;</span>      <span class="token keyword">const</span> menban <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'menban'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token keyword">if</span> <span class="token punctuation">(</span>flag<span class="token punctuation">)</span> <span class="token punctuation">{</span>        menban<span class="token punctuation">.</span>style<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token string">'absolute'</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>        menban<span class="token punctuation">.</span>style<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token string">'relative'</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span>    <span class="token punctuation">}</span>  <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>滚动行为的相关CSS</title>
+      <link href="/2022/05/21/%E6%BB%9A%E5%8A%A8%E8%A1%8C%E4%B8%BA%E7%9A%84%E7%9B%B8%E5%85%B3CSS/"/>
+      <url>/2022/05/21/%E6%BB%9A%E5%8A%A8%E8%A1%8C%E4%B8%BA%E7%9A%84%E7%9B%B8%E5%85%B3CSS/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTML内置行为与应用</title>
+      <link href="/2022/05/21/HTML%E5%86%85%E7%BD%AE%E8%A1%8C%E4%B8%BA%E4%B8%8E%E5%BA%94%E7%94%A8/"/>
+      <url>/2022/05/21/HTML%E5%86%85%E7%BD%AE%E8%A1%8C%E4%B8%BA%E4%B8%8E%E5%BA%94%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h3 id="html的一些内置行为和应用"><a href="#html的一些内置行为和应用" class="headerlink" title="html的一些内置行为和应用"></a>html的一些内置行为和应用</h3><ol><li>a 链接的<em>target</em>属性呢可以设置<em>any</em>防止打开多个tab标签页</li><li><em>details</em>标签类似<strong>详情</strong>功能按钮可展开的标签，搭配<em>summary</em>标签一起使用<pre class=" language-html"><code class="language-html"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>details</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>summary</span><span class="token punctuation">></span></span>这是摘要<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>summary</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>这里是具体描述，标签相对随意，例如这里使用的》标签<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>details</span><span class="token punctuation">></span></span></code></pre></li><li><strong>accesskey</strong>属性是快捷键访问</li><li><strong>tabindex</strong></li><li><strong>serset</strong></li><li><strong>type&#x3D;’’range</strong></li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> html </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue安装依赖包版本不兼容问题</title>
+      <link href="/2022/05/18/vue%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8C%85%E7%89%88%E6%9C%AC%E4%B8%8D%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/"/>
+      <url>/2022/05/18/vue%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8C%85%E7%89%88%E6%9C%AC%E4%B8%8D%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h3 id="vue项目需要安装依赖包，各种依赖包和node的版本有不兼容等一系列问题"><a href="#vue项目需要安装依赖包，各种依赖包和node的版本有不兼容等一系列问题" class="headerlink" title="vue项目需要安装依赖包，各种依赖包和node的版本有不兼容等一系列问题"></a>vue项目需要安装依赖包，各种依赖包和node的版本有不兼容等一系列问题</h3><p>这里呢记录一个一个十分好用的npm命令</p><pre><code>    npm install [xxx] --force //强制安装</code></pre><p>或者</p><pre><code>    npm install [xxx] --legacy-peer-deps //忽略版本冲突</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vue-router三级路由问题</title>
       <link href="/2022/05/17/vue-router%E4%B8%89%E7%BA%A7%E8%B7%AF%E7%94%B1%E9%97%AE%E9%A2%98/"/>
       <url>/2022/05/17/vue-router%E4%B8%89%E7%BA%A7%E8%B7%AF%E7%94%B1%E9%97%AE%E9%A2%98/</url>
